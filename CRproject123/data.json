@@ -1,17 +1,18 @@
-﻿[
+[
   {
-    "id": 1,
-    "name": "testN1",
-    "email": "testE1"
+    "Id": 1,
+    "Name": "testN1",
+    "Email": "testE1"
   },
   {
-    "id": 2,
-    "name": "testN2",
-    "email": "testE2"
+    "Id": 2,
+    "Name": "testN2",
+    "Email": "testE2"
   },
   {
-    "id": 3,
-    "name": "testN3",
-    "email": "testE3"
+    "Id": 3,
+    "Name": "testN3",
+    "Email": "testE3"
   }
+
 ]

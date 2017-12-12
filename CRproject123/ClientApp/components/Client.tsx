@@ -42,11 +42,11 @@ export class Clients extends React.Component<RouteComponentProps<{}>, DataState>
                 </tr>
             </thead>
             <tbody>
-            {clients.map(forecast =>
-                <tr key={ forecast.id }>
-                    <td>{ forecast.id }</td>
-                    <td>{ forecast.name }</td>
-                    <td>{ forecast.email }</td>
+            {clients.map(client =>
+                <tr key={ client.id }>
+                    <td>{ client.id }</td>
+                    <td>{ client.name }</td>
+                    <td>{ client.email }</td>
     
                 </tr>
             )}

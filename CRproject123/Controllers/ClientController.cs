@@ -39,30 +39,64 @@ namespace CRproject123.Controllers
             return client;
         }
 
- 
+        [Route("/AddClient")]
+        public IEnumerable<Client> AddClient()
+        {
+            var filepath = @"./data.json";
+            var jsondata = System.IO.File.ReadAllText(filepath);        // get the data fromn data.json
+
+            var clientlist = JsonConvert.DeserializeObject<List<Client>>(jsondata); // make list out of the data
+
+            clientlist.Add(new Client()                                              // add stuff to list
+            { Id = 4, Email = "testest", Name = "nametest" });
+
+            jsondata = JsonConvert.SerializeObject(clientlist);           // write the list back to json
+            System.IO.File.WriteAllText(filepath, jsondata);
+
+            return clientlist;
+        }
+
+        [Route("/GetClient/{id}")]
+        public IEnumerable<Client> GetClient(int id)
+        {
+            var filepath = @"./data.json";
+            var jsondata = System.IO.File.ReadAllText(filepath);    // get the data fromn data.json
+
+            var clientlist = JsonConvert.DeserializeObject<List<Client>>(jsondata); // list out of the data
+
+
+            var result = clientlist.Where(x => x.Id == id);
+
+            return result;
+        }
+
+
+        [Route("/DelClient/{id}")]
+        public IEnumerable<Client> DelClient(int id)
+        {
+            var filepath = @"./data.json";
+            var jsondata = System.IO.File.ReadAllText(filepath);    // get the data fromn data.json
+
+            var clientlist = JsonConvert.DeserializeObject<List<Client>>(jsondata); // list out of the data
+
+
+            clientlist.RemoveAll(x => x.Id == id);
+
+            
+            jsondata = JsonConvert.SerializeObject(clientlist);         // write the list back to json
+            System.IO.File.WriteAllText(filepath, jsondata);
+
+            return clientlist;
+        }
+
+
+
 
 
         [Route("/testink/")]
         public IEnumerable<Client> Testink()
         {
-            //var values = JsonConvert.DeserializeObject<>>(Json);
-            var filepath = @"./data.json";
-            var jsondata = System.IO.File.ReadAllText(filepath);
-
-            ////List<Client> clientlist;
-
-            //var clientlist = JsonConvert.DeserializeObject<List<Client>>(jsondata);
-
-            //clientlist.Add(new Client()
-            //{ Id = 4, Email = "testest", Name = "nametest" });
-
-            //jsondata = JsonConvert.SerializeObject(clientlist);
-            //System.IO.File.WriteAllText(filepath, jsondata);
-            
-            var result = JsonConvert.DeserializeObject<IEnumerable<Client>>(jsondata);
-            
-
-            return result;
+            return null;
         }
     }
 }
