@@ -13,6 +13,7 @@ namespace CRproject123.Controllers
     [Route("api/Client")]
     public class ClientController : Controller
     {
+        #region all the testing stuff
         List<Client> client = new List<Client>  // Sample object data for testing.
         {
             new Client { Id = 1, Name = "testN1", Email="testE1"  },
@@ -22,6 +23,19 @@ namespace CRproject123.Controllers
 
         };
 
+
+        [Route("/testink/")]
+        public IEnumerable<Client> Testink()            //For some testing purposes
+        {
+            return null;
+        }
+
+        [Route("/GetAllnn")]
+        public IEnumerable<Client> GetAllnn()   // gives the client object data, isn't special, here for testing purposes
+        {
+            return client;
+        }
+        #endregion
 
         [Route("/GetAll")]
         public IEnumerable<Client> GetAll()   // Read and return the json data from json file
@@ -33,10 +47,17 @@ namespace CRproject123.Controllers
             return result;
         }
 
-        [Route("/GetAllnn")]
-        public IEnumerable<Client> GetAllnn()   // gives the client object data, isn't special, here for testing purposes
+        [Route("/GetClient/{id}")]
+        public IEnumerable<Client> GetClient(int id)
         {
-            return client;
+            var filepath = @"./data.json";
+            var jsondata = System.IO.File.ReadAllText(filepath);    // get the data fromn data.json
+
+            var clientlist = JsonConvert.DeserializeObject<List<Client>>(jsondata); // list out of the data
+            
+            var result = clientlist.Where(x => x.Id == id);
+
+            return result;
         }
 
         [Route("/AddClient")]
@@ -55,22 +76,7 @@ namespace CRproject123.Controllers
 
             return clientlist;
         }
-
-        [Route("/GetClient/{id}")]
-        public IEnumerable<Client> GetClient(int id)
-        {
-            var filepath = @"./data.json";
-            var jsondata = System.IO.File.ReadAllText(filepath);    // get the data fromn data.json
-
-            var clientlist = JsonConvert.DeserializeObject<List<Client>>(jsondata); // list out of the data
-
-
-            var result = clientlist.Where(x => x.Id == id);
-
-            return result;
-        }
-
-
+        
         [Route("/DelClient/{id}")]
         public IEnumerable<Client> DelClient(int id)
         {
@@ -79,24 +85,13 @@ namespace CRproject123.Controllers
 
             var clientlist = JsonConvert.DeserializeObject<List<Client>>(jsondata); // list out of the data
 
-
-            clientlist.RemoveAll(x => x.Id == id);
-
-            
+            clientlist.RemoveAll(x => x.Id == id);          // delete the object by it's inserted id value
+                        
             jsondata = JsonConvert.SerializeObject(clientlist);         // write the list back to json
             System.IO.File.WriteAllText(filepath, jsondata);
 
             return clientlist;
         }
 
-
-
-
-
-        [Route("/testink/")]
-        public IEnumerable<Client> Testink()
-        {
-            return null;
-        }
     }
 }

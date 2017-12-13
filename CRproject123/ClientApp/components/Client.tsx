@@ -2,18 +2,24 @@
 import { RouteComponentProps } from 'react-router';
 
 
-
 interface DataState {
     clients: Client[];
     loading: boolean;
 }
+
+
 export class Clients extends React.Component<RouteComponentProps<{}>, DataState>{
+
+    public variable: string;
+    public id: string;
 
     constructor() {
         super();
         this.state = { clients: [], loading: true };
 
-        fetch('/GetAll')
+        this.variable = "GetAll";
+        
+        fetch(this.variable)
             .then(response => response.json() as Promise<Client[]>)
             .then(data => {
                 this.setState({ clients: data, loading: false });
@@ -25,9 +31,14 @@ export class Clients extends React.Component<RouteComponentProps<{}>, DataState>
             ? <p><em>Loading...</em></p>
             : Clients.renderClientsTable(this.state.clients)
         return <div>
-            <h1>JSON data output...? </h1>
-            <p> just gonna test if anything happens </p>
-            { clientTable }
+            <h1>JSON data output </h1>
+            <p> For now, some fluff text. Anyway the wind blows. </p>
+            
+            <input type="text" id="xid" value={this.id} />
+
+            <button onClick={this.hi} >Click </button>
+            
+            {clientTable}
         </div>;
     }
     
@@ -53,8 +64,15 @@ export class Clients extends React.Component<RouteComponentProps<{}>, DataState>
             </tbody>
         </table>;
     }
+
+    hi(): any {
+        
+        alert("test");
+
+    }
     
 }
+
 
 interface Client {
     id: number;
