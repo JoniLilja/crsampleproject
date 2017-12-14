@@ -36,9 +36,14 @@ export class Clients extends React.Component<RouteComponentProps<{}>, DataState>
             
             <input type="text" id="xid" value={this.id} />
 
-            <button onClick={this.hi} >Click </button>
+            <button onClick={this.del} >Delete </button>
+
+            <button onClick={this.add} >Add </button>
             
             {clientTable}
+
+            <p id="cc"> 
+                </p>
         </div>;
     }
     
@@ -57,7 +62,8 @@ export class Clients extends React.Component<RouteComponentProps<{}>, DataState>
                 <tr key={ client.id }>
                     <td>{ client.id }</td>
                     <td>{ client.name }</td>
-                    <td>{ client.email }</td>
+                    <td>{client.email}</td>
+                    <td id="mm"> del </td>
     
                 </tr>
             )}
@@ -65,10 +71,28 @@ export class Clients extends React.Component<RouteComponentProps<{}>, DataState>
         </table>;
     }
 
-    hi(): any {
-        
-        alert("test");
+    del(): any {
+        var test = new XMLHttpRequest(), method = 'GET', url = "/DelClient/4";
 
+        test.open(method, url, true);
+
+        test.onload = function () { };
+
+        test.send();
+
+        window.location.reload();
+    }
+
+    add(): any {
+        var test = new XMLHttpRequest(), method = 'GET', url = "/AddClient";
+
+        test.open(method, url, true);
+
+        test.onload = function () { };
+
+        test.send();
+
+        window.location.reload();
     }
     
 }

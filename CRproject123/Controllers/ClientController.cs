@@ -44,6 +44,8 @@ namespace CRproject123.Controllers
             var jsondata = System.IO.File.ReadAllText(filepath);
             var result = JsonConvert.DeserializeObject<IEnumerable<Client>>(jsondata);
 
+            result.OrderByDescending(x => x.Id);
+
             return result;
         }
 
@@ -55,7 +57,7 @@ namespace CRproject123.Controllers
 
             var clientlist = JsonConvert.DeserializeObject<List<Client>>(jsondata); // list out of the data
             
-            var result = clientlist.Where(x => x.Id == id);
+            var result = clientlist.Where(x => x.Id == id).OrderBy(x=>x.Id);
 
             return result;
         }
