@@ -37,7 +37,7 @@ export class Clients extends React.Component<RouteComponentProps<{}>, DataState>
             : Clients.renderClientsTable(this.state.clients)
         return <div>
             <h1>JSON data output </h1>
-            <p> For now, some fluff text. Anyway the wind blows. </p>
+            <p> Something </p>
             <form onSubmit={this.handleSubmit}>
                 <input value={this.state.inputValue} onChange={this.updateValue} />
 
